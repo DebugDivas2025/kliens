@@ -48,6 +48,7 @@
             this.Időpont = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kép = new System.Windows.Forms.DataGridViewImageColumn();
             this.Szinkronizálva = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonTestApi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,12 +214,23 @@
             this.Szinkronizálva.Name = "Szinkronizálva";
             this.Szinkronizálva.Width = 125;
             // 
+            // buttonTestApi
+            // 
+            this.buttonTestApi.Location = new System.Drawing.Point(585, 103);
+            this.buttonTestApi.Name = "buttonTestApi";
+            this.buttonTestApi.Size = new System.Drawing.Size(75, 23);
+            this.buttonTestApi.TabIndex = 15;
+            this.buttonTestApi.Text = "tesztApi";
+            this.buttonTestApi.UseVisualStyleBackColor = true;
+            this.buttonTestApi.Click += new System.EventHandler(this.buttonTestApi_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(227)))), ((int)(((byte)(178)))));
             this.ClientSize = new System.Drawing.Size(1179, 736);
+            this.Controls.Add(this.buttonTestApi);
             this.Controls.Add(this.btnSync);
             this.Controls.Add(this.dgvSales);
             this.Controls.Add(this.label7);
@@ -263,6 +275,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Időpont;
         private System.Windows.Forms.DataGridViewImageColumn Kép;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Szinkronizálva;
+        private System.Windows.Forms.Button buttonTestApi;
     }
 }
 
