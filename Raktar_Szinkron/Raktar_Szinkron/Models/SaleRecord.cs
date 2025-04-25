@@ -12,8 +12,8 @@ namespace Raktar_Szinkron.Models
     {
         public string SKU { get; set; }
         public int Quantity { get; set; }
-        public DateTime SoldAt { get; set; }
-        public Image ProductImage { get; set; }
-        public bool Synced { get; set; }
+        public DateTime SaleDate { get; set; }
+        //public Image ProductImage { get; set; }
+        //public bool Synced { get; set; }
     }
 }

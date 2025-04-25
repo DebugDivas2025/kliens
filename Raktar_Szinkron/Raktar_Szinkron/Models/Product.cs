@@ -10,7 +10,8 @@ namespace Raktar_Szinkron.Models
     {
         public string Sku { get; set; }
         public int QuantityOnHand { get; set; }
-        public string ImageFileSmall { get; set; }
+        public string ProductName { get; set; }
+        //public string ImageFileSmall { get; set; }
 
     }
 }

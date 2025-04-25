@@ -42,12 +42,12 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvSales = new System.Windows.Forms.DataGridView();
-            this.btnSync = new System.Windows.Forms.Button();
             this.SKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Mennyiség = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Időpont = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Kép = new System.Windows.Forms.DataGridViewImageColumn();
             this.Szinkronizálva = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnSync = new System.Windows.Forms.Button();
             this.buttonTestApi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
@@ -170,15 +170,6 @@
             this.dgvSales.Size = new System.Drawing.Size(680, 300);
             this.dgvSales.TabIndex = 13;
             // 
-            // btnSync
-            // 
-            this.btnSync.Location = new System.Drawing.Point(282, 694);
-            this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(133, 30);
-            this.btnSync.TabIndex = 14;
-            this.btnSync.Text = "Szinkronizálás";
-            this.btnSync.UseVisualStyleBackColor = true;
-            // 
             // SKU
             // 
             this.SKU.HeaderText = "SKU";
@@ -214,6 +205,15 @@
             this.Szinkronizálva.Name = "Szinkronizálva";
             this.Szinkronizálva.Width = 125;
             // 
+            // btnSync
+            // 
+            this.btnSync.Location = new System.Drawing.Point(282, 694);
+            this.btnSync.Name = "btnSync";
+            this.btnSync.Size = new System.Drawing.Size(133, 30);
+            this.btnSync.TabIndex = 14;
+            this.btnSync.Text = "Szinkronizálás";
+            this.btnSync.UseVisualStyleBackColor = true;
+            // 
             // buttonTestApi
             // 
             this.buttonTestApi.Location = new System.Drawing.Point(585, 103);
@@ -248,6 +248,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Hesperides - RaktárSzinkron";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
