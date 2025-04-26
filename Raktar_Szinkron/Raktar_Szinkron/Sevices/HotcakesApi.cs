@@ -16,7 +16,7 @@ namespace Raktar_Szinkron.Sevices
     {
         private readonly HttpClient _client;
         private readonly string _baseUrl = "http://rendfejl1010.northeurope.cloudapp.azure.com/DesktopModules/Hotcakes/API/rest/v1/";
-        private readonly string _apiKey = "1-764ad1a8-4c6f-4bcd-bdc5-9af0f76aec39";
+        private readonly string _apiKey = "1-5dd6e74c-0fdb-48f4-a47d-1e3a84811bd5";
 
 
         public HotcakesApi()
@@ -33,7 +33,9 @@ namespace Raktar_Szinkron.Sevices
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<Product[]>(json);
+                var responseData = JsonConvert.DeserializeObject<ProductResponse>(json);
+
+                return responseData?.Content?.Products?.ToArray(); // <- Így jó!
             }
 
             return null;
@@ -47,6 +49,7 @@ namespace Raktar_Szinkron.Sevices
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
+                MessageBox.Show(json);
                 var responseData = JsonConvert.DeserializeObject<ProductResponse>(json);
 
                 return responseData?.Content?.Products?.FirstOrDefault();

@@ -35,10 +35,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.textBoxSKU = new System.Windows.Forms.TextBox();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.textBoxQuantity = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvSales = new System.Windows.Forms.DataGridView();
@@ -49,6 +49,9 @@
             this.Szinkronizálva = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSync = new System.Windows.Forms.Button();
             this.buttonTestApi = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.buttonFindProduct = new System.Windows.Forms.Button();
+            this.listBoxProducts = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,33 +111,33 @@
             this.label6.TabIndex = 5;
             this.label6.Text = "Mennyiség";
             // 
-            // textBox1
+            // textBoxName
             // 
-            this.textBox1.Location = new System.Drawing.Point(215, 85);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 22);
-            this.textBox1.TabIndex = 6;
+            this.textBoxName.Location = new System.Drawing.Point(215, 85);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(200, 22);
+            this.textBoxName.TabIndex = 6;
             // 
-            // textBox2
+            // textBoxSKU
             // 
-            this.textBox2.Location = new System.Drawing.Point(215, 122);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(200, 22);
-            this.textBox2.TabIndex = 7;
+            this.textBoxSKU.Location = new System.Drawing.Point(215, 122);
+            this.textBoxSKU.Name = "textBoxSKU";
+            this.textBoxSKU.Size = new System.Drawing.Size(200, 22);
+            this.textBoxSKU.TabIndex = 7;
             // 
-            // textBox3
+            // textBoxPrice
             // 
-            this.textBox3.Location = new System.Drawing.Point(268, 158);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(83, 22);
-            this.textBox3.TabIndex = 8;
+            this.textBoxPrice.Location = new System.Drawing.Point(268, 158);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(83, 22);
+            this.textBoxPrice.TabIndex = 8;
             // 
-            // textBox4
+            // textBoxQuantity
             // 
-            this.textBox4.Location = new System.Drawing.Point(268, 221);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(83, 22);
-            this.textBox4.TabIndex = 9;
+            this.textBoxQuantity.Location = new System.Drawing.Point(268, 221);
+            this.textBoxQuantity.Name = "textBoxQuantity";
+            this.textBoxQuantity.Size = new System.Drawing.Size(83, 22);
+            this.textBoxQuantity.TabIndex = 9;
             // 
             // dateTimePicker1
             // 
@@ -216,13 +219,43 @@
             // 
             // buttonTestApi
             // 
-            this.buttonTestApi.Location = new System.Drawing.Point(585, 103);
+            this.buttonTestApi.Location = new System.Drawing.Point(858, 69);
             this.buttonTestApi.Name = "buttonTestApi";
-            this.buttonTestApi.Size = new System.Drawing.Size(75, 23);
+            this.buttonTestApi.Size = new System.Drawing.Size(84, 38);
             this.buttonTestApi.TabIndex = 15;
-            this.buttonTestApi.Text = "tesztApi";
+            this.buttonTestApi.Text = "api";
             this.buttonTestApi.UseVisualStyleBackColor = true;
             this.buttonTestApi.Click += new System.EventHandler(this.buttonTestApi_Click);
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.Location = new System.Drawing.Point(330, 262);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(85, 36);
+            this.buttonAdd.TabIndex = 16;
+            this.buttonAdd.Text = "Hozzáadás";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // buttonFindProduct
+            // 
+            this.buttonFindProduct.Location = new System.Drawing.Point(205, 262);
+            this.buttonFindProduct.Name = "buttonFindProduct";
+            this.buttonFindProduct.Size = new System.Drawing.Size(84, 36);
+            this.buttonFindProduct.TabIndex = 17;
+            this.buttonFindProduct.Text = "Keresés";
+            this.buttonFindProduct.UseVisualStyleBackColor = true;
+            this.buttonFindProduct.Click += new System.EventHandler(this.buttonFindProduct_Click);
+            // 
+            // listBoxProducts
+            // 
+            this.listBoxProducts.FormattingEnabled = true;
+            this.listBoxProducts.ItemHeight = 16;
+            this.listBoxProducts.Location = new System.Drawing.Point(483, 85);
+            this.listBoxProducts.Name = "listBoxProducts";
+            this.listBoxProducts.Size = new System.Drawing.Size(236, 212);
+            this.listBoxProducts.TabIndex = 18;
+            this.listBoxProducts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -230,15 +263,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(227)))), ((int)(((byte)(178)))));
             this.ClientSize = new System.Drawing.Size(1179, 736);
+            this.Controls.Add(this.listBoxProducts);
+            this.Controls.Add(this.buttonFindProduct);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonTestApi);
             this.Controls.Add(this.btnSync);
             this.Controls.Add(this.dgvSales);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxQuantity);
+            this.Controls.Add(this.textBoxPrice);
+            this.Controls.Add(this.textBoxSKU);
+            this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -263,10 +299,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.TextBox textBoxSKU;
+        private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.TextBox textBoxQuantity;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dgvSales;
@@ -277,6 +313,9 @@
         private System.Windows.Forms.DataGridViewImageColumn Kép;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Szinkronizálva;
         private System.Windows.Forms.Button buttonTestApi;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonFindProduct;
+        private System.Windows.Forms.ListBox listBoxProducts;
     }
 }
 
