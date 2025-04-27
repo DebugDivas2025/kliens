@@ -93,12 +93,13 @@ namespace Raktar_Szinkron
             dgvSales.DataSource = null;              // Először nullázzuk, hogy frissüljön
             dgvSales.DataSource = saleRecords;        // Újra betöltjük a lista tartalmát
 
-            // Oszlopok újracímkézése csak egyszer kéne (de most gyorsan itt is)
+            //// Oszlopok újracímkézése csak egyszer kéne (de most gyorsan itt is)
             dgvSales.Columns["SKU"].HeaderText = "SKU";
             dgvSales.Columns["Quantity"].HeaderText = "Mennyiség";
             dgvSales.Columns["SaleDate"].HeaderText = "Időpont";
 
             dgvSales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
         }
         private void ClearForm()
         {
@@ -147,6 +148,11 @@ namespace Raktar_Szinkron
                 textBoxSKU.Text = selectedProduct.Sku;
                 textBoxPrice.Text = selectedProduct.SitePrice.ToString("0.00");
             }
+        }
+
+        private void btnSync_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

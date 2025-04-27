@@ -42,11 +42,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.dgvSales = new System.Windows.Forms.DataGridView();
-            this.SKU = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Mennyiség = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Időpont = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kép = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Szinkronizálva = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnSync = new System.Windows.Forms.Button();
             this.buttonTestApi = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
@@ -59,6 +54,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(34, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(218, 25);
@@ -68,27 +64,33 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label2.Location = new System.Drawing.Point(67, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 16);
+            this.label2.Size = new System.Drawing.Size(98, 22);
             this.label2.TabIndex = 1;
             this.label2.Text = "Termék neve";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(67, 125);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 16);
+            this.label3.Size = new System.Drawing.Size(39, 22);
             this.label3.TabIndex = 2;
             this.label3.Text = "SKU";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(67, 158);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 16);
+            this.label4.Size = new System.Drawing.Size(75, 22);
             this.label4.TabIndex = 3;
             this.label4.Text = "Egységár";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -96,18 +98,22 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label5.Location = new System.Drawing.Point(67, 189);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 16);
+            this.label5.Size = new System.Drawing.Size(64, 22);
             this.label5.TabIndex = 4;
             this.label5.Text = "Időpont";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label6.Location = new System.Drawing.Point(67, 221);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(73, 16);
+            this.label6.Size = new System.Drawing.Size(86, 22);
             this.label6.TabIndex = 5;
             this.label6.Text = "Mennyiség";
             // 
@@ -115,26 +121,26 @@
             // 
             this.textBoxName.Location = new System.Drawing.Point(215, 85);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(200, 22);
+            this.textBoxName.Size = new System.Drawing.Size(228, 22);
             this.textBoxName.TabIndex = 6;
             // 
             // textBoxSKU
             // 
             this.textBoxSKU.Location = new System.Drawing.Point(215, 122);
             this.textBoxSKU.Name = "textBoxSKU";
-            this.textBoxSKU.Size = new System.Drawing.Size(200, 22);
+            this.textBoxSKU.Size = new System.Drawing.Size(228, 22);
             this.textBoxSKU.TabIndex = 7;
             // 
             // textBoxPrice
             // 
-            this.textBoxPrice.Location = new System.Drawing.Point(268, 158);
+            this.textBoxPrice.Location = new System.Drawing.Point(282, 158);
             this.textBoxPrice.Name = "textBoxPrice";
             this.textBoxPrice.Size = new System.Drawing.Size(83, 22);
             this.textBoxPrice.TabIndex = 8;
             // 
             // textBoxQuantity
             // 
-            this.textBoxQuantity.Location = new System.Drawing.Point(268, 221);
+            this.textBoxQuantity.Location = new System.Drawing.Point(282, 222);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(83, 22);
             this.textBoxQuantity.TabIndex = 9;
@@ -143,13 +149,14 @@
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(215, 189);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(228, 22);
             this.dateTimePicker1.TabIndex = 10;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label7.Location = new System.Drawing.Point(34, 319);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(198, 25);
@@ -160,12 +167,6 @@
             // 
             this.dgvSales.BackgroundColor = System.Drawing.Color.White;
             this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SKU,
-            this.Mennyiség,
-            this.Időpont,
-            this.Kép,
-            this.Szinkronizálva});
             this.dgvSales.Location = new System.Drawing.Point(39, 365);
             this.dgvSales.Name = "dgvSales";
             this.dgvSales.RowHeadersWidth = 51;
@@ -173,49 +174,17 @@
             this.dgvSales.Size = new System.Drawing.Size(680, 300);
             this.dgvSales.TabIndex = 13;
             // 
-            // SKU
-            // 
-            this.SKU.HeaderText = "SKU";
-            this.SKU.MinimumWidth = 6;
-            this.SKU.Name = "SKU";
-            this.SKU.Width = 125;
-            // 
-            // Mennyiség
-            // 
-            this.Mennyiség.HeaderText = "Mennyiség";
-            this.Mennyiség.MinimumWidth = 6;
-            this.Mennyiség.Name = "Mennyiség";
-            this.Mennyiség.Width = 125;
-            // 
-            // Időpont
-            // 
-            this.Időpont.HeaderText = "Időpont";
-            this.Időpont.MinimumWidth = 6;
-            this.Időpont.Name = "Időpont";
-            this.Időpont.Width = 125;
-            // 
-            // Kép
-            // 
-            this.Kép.HeaderText = "Kép";
-            this.Kép.MinimumWidth = 6;
-            this.Kép.Name = "Kép";
-            this.Kép.Width = 125;
-            // 
-            // Szinkronizálva
-            // 
-            this.Szinkronizálva.HeaderText = "Szinkronizálva";
-            this.Szinkronizálva.MinimumWidth = 6;
-            this.Szinkronizálva.Name = "Szinkronizálva";
-            this.Szinkronizálva.Width = 125;
-            // 
             // btnSync
             // 
-            this.btnSync.Location = new System.Drawing.Point(282, 694);
+            this.btnSync.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnSync.ForeColor = System.Drawing.Color.White;
+            this.btnSync.Location = new System.Drawing.Point(282, 671);
             this.btnSync.Name = "btnSync";
-            this.btnSync.Size = new System.Drawing.Size(133, 30);
+            this.btnSync.Size = new System.Drawing.Size(161, 53);
             this.btnSync.TabIndex = 14;
             this.btnSync.Text = "Szinkronizálás";
-            this.btnSync.UseVisualStyleBackColor = true;
+            this.btnSync.UseVisualStyleBackColor = false;
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // buttonTestApi
             // 
@@ -229,22 +198,26 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(330, 262);
+            this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.buttonAdd.ForeColor = System.Drawing.Color.White;
+            this.buttonAdd.Location = new System.Drawing.Point(342, 262);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(85, 36);
+            this.buttonAdd.Size = new System.Drawing.Size(101, 49);
             this.buttonAdd.TabIndex = 16;
             this.buttonAdd.Text = "Hozzáadás";
-            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.UseVisualStyleBackColor = false;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // buttonFindProduct
             // 
-            this.buttonFindProduct.Location = new System.Drawing.Point(205, 262);
+            this.buttonFindProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.buttonFindProduct.ForeColor = System.Drawing.Color.White;
+            this.buttonFindProduct.Location = new System.Drawing.Point(215, 262);
             this.buttonFindProduct.Name = "buttonFindProduct";
-            this.buttonFindProduct.Size = new System.Drawing.Size(84, 36);
+            this.buttonFindProduct.Size = new System.Drawing.Size(100, 49);
             this.buttonFindProduct.TabIndex = 17;
             this.buttonFindProduct.Text = "Keresés";
-            this.buttonFindProduct.UseVisualStyleBackColor = true;
+            this.buttonFindProduct.UseVisualStyleBackColor = false;
             this.buttonFindProduct.Click += new System.EventHandler(this.buttonFindProduct_Click);
             // 
             // listBoxProducts
@@ -307,11 +280,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.Button btnSync;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SKU;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Mennyiség;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Időpont;
-        private System.Windows.Forms.DataGridViewImageColumn Kép;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Szinkronizálva;
         private System.Windows.Forms.Button buttonTestApi;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonFindProduct;
