@@ -48,6 +48,7 @@
             this.buttonFindProduct = new System.Windows.Forms.Button();
             this.listBoxProducts = new System.Windows.Forms.ListBox();
             this.btnExportCsv = new System.Windows.Forms.Button();
+            this.btnOpenSalesLog = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -241,12 +242,23 @@
             this.btnExportCsv.UseVisualStyleBackColor = true;
             this.btnExportCsv.Click += new System.EventHandler(this.btnExportCsv_Click);
             // 
+            // btnOpenSalesLog
+            // 
+            this.btnOpenSalesLog.Location = new System.Drawing.Point(755, 551);
+            this.btnOpenSalesLog.Name = "btnOpenSalesLog";
+            this.btnOpenSalesLog.Size = new System.Drawing.Size(122, 95);
+            this.btnOpenSalesLog.TabIndex = 20;
+            this.btnOpenSalesLog.Text = "Eladási napló megnyitása";
+            this.btnOpenSalesLog.UseVisualStyleBackColor = true;
+            this.btnOpenSalesLog.Click += new System.EventHandler(this.btnOpenSalesLog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(227)))), ((int)(((byte)(178)))));
             this.ClientSize = new System.Drawing.Size(1179, 736);
+            this.Controls.Add(this.btnOpenSalesLog);
             this.Controls.Add(this.btnExportCsv);
             this.Controls.Add(this.listBoxProducts);
             this.Controls.Add(this.buttonFindProduct);
@@ -297,6 +309,7 @@
         private System.Windows.Forms.Button buttonFindProduct;
         private System.Windows.Forms.ListBox listBoxProducts;
         private System.Windows.Forms.Button btnExportCsv;
+        private System.Windows.Forms.Button btnOpenSalesLog;
     }
 }
 

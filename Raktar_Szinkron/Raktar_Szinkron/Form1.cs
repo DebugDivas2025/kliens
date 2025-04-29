@@ -231,6 +231,19 @@ namespace Raktar_Szinkron
                         }
 
                         MessageBox.Show("Exportálás sikeres!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string logFile = "sales_log.csv";
+                        bool fileExists = File.Exists(logFile);
+
+                        using (StreamWriter sw = new StreamWriter(logFile, true, Encoding.UTF8))
+                        {
+                            if (!fileExists)
+                                sw.WriteLine("SKU;Quantity;SaleDate;Price");
+
+                            foreach (var record in saleRecords)
+                            {
+                                sw.WriteLine($"{record.SKU};{record.Quantity};{record.SaleDate:yyyy-MM-dd};{record.Price}");
+                            }
+                        }
                         try
                         {
                             Process.Start(new ProcessStartInfo()
@@ -256,6 +269,12 @@ namespace Raktar_Szinkron
                     }
                 }
             }
+        }
+
+        private void btnOpenSalesLog_Click(object sender, EventArgs e)
+        {
+            var logForm = new SalesLogForm();
+            logForm.Show();
         }
     }
 }
