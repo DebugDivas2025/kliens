@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Raktar_Szinkron.Sevices;
 using Raktar_Szinkron.Models;
 using System.IO;
+using System.Diagnostics;
 
 namespace Raktar_Szinkron
 {
@@ -230,6 +231,24 @@ namespace Raktar_Szinkron
                         }
 
                         MessageBox.Show("Exportálás sikeres!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        try
+                        {
+                            Process.Start(new ProcessStartInfo()
+                            {
+                                FileName = sfd.FileName,
+                                UseShellExecute = true
+                            });
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("A fájl exportálása sikeres, de nem sikerült megnyitni:\n" + ex.Message);
+                        }
+                        // Automatikus megnyitás
+                        Process.Start(new ProcessStartInfo()
+                        {
+                            FileName = sfd.FileName,
+                            UseShellExecute = true
+                        });
                     }
                     catch (Exception ex)
                     {
