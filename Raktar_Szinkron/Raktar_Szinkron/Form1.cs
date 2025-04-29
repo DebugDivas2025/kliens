@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Raktar_Szinkron.Sevices;
 using Raktar_Szinkron.Models;
+using System.IO;
 
 namespace Raktar_Szinkron
 {
@@ -97,7 +98,7 @@ namespace Raktar_Szinkron
             dgvSales.Columns["SKU"].HeaderText = "SKU";
             dgvSales.Columns["Quantity"].HeaderText = "Mennyiség";
             dgvSales.Columns["SaleDate"].HeaderText = "Időpont";
-
+            dgvSales.Columns["Szinkronizalva"].HeaderText = "Szinkronizálva";
             dgvSales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
         }
@@ -150,9 +151,92 @@ namespace Raktar_Szinkron
             }
         }
 
-        private void btnSync_Click(object sender, EventArgs e)
+        private async void btnSync_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow row in dgvSales.Rows)
+            {
+                if (row.IsNewRow) continue;
 
+                string sku = row.Cells["SKU"].Value?.ToString();
+                int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
+
+                var product = await _api.GetProductBySkuAsync(sku); // 1. Lekérés SKU alapján
+
+                if (product != null)
+                {
+                    string bvin = product.Bvin;
+                    int currentQty = product.QuantityOnHand ?? 0;
+                    int newQty = Math.Max(0, currentQty - quantitySold);
+
+                    bool success = await _api.UpdateInventoryAsync(bvin, newQty); // 2. Frissítés
+
+                    if (success)
+                    {
+                        row.Cells["Szinkronizálva"].Value = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Nem sikerült frissíteni: {sku}", "Hiba");
+                    }
+                }
+            }
+
+            MessageBox.Show("Szinkronizálás befejezve.");
+        }
+
+        private void btnExportCsv_Click(object sender, EventArgs e)
+        {
+            if (dgvSales.Rows.Count == 0)
+            {
+                MessageBox.Show("Nincs adat az exportáláshoz.", "Figyelmeztetés", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "CSV fájl (*.csv)|*.csv";
+                sfd.FileName = "eladasok.csv";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8))
+                        {
+                            // Oszlopfejlécek
+                            for (int i = 0; i < dgvSales.Columns.Count; i++)
+                            {
+                                sw.Write(dgvSales.Columns[i].HeaderText);
+                                if (i < dgvSales.Columns.Count - 1)
+                                    sw.Write(";");
+                            }
+                            sw.WriteLine();
+
+                            // Sorok
+                            foreach (DataGridViewRow row in dgvSales.Rows)
+                            {
+                                if (row.IsNewRow) continue;
+
+                                for (int i = 0; i < dgvSales.Columns.Count; i++)
+                                {
+                                    var value = row.Cells[i].Value?.ToString()?.Replace(";", ","); // ne legyen ; az adatban
+                                    sw.Write(value);
+
+                                    if (i < dgvSales.Columns.Count - 1)
+                                        sw.Write(";");
+                                }
+                                sw.WriteLine();
+                            }
+                        }
+
+                        MessageBox.Show("Exportálás sikeres!", "Siker", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Hiba exportálás közben:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

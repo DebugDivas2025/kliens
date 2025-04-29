@@ -47,6 +47,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonFindProduct = new System.Windows.Forms.Button();
             this.listBoxProducts = new System.Windows.Forms.ListBox();
+            this.btnExportCsv = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -230,12 +231,23 @@
             this.listBoxProducts.TabIndex = 18;
             this.listBoxProducts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
+            // btnExportCsv
+            // 
+            this.btnExportCsv.Location = new System.Drawing.Point(755, 386);
+            this.btnExportCsv.Name = "btnExportCsv";
+            this.btnExportCsv.Size = new System.Drawing.Size(122, 113);
+            this.btnExportCsv.TabIndex = 19;
+            this.btnExportCsv.Text = "Exportálás CSV-be";
+            this.btnExportCsv.UseVisualStyleBackColor = true;
+            this.btnExportCsv.Click += new System.EventHandler(this.btnExportCsv_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(227)))), ((int)(((byte)(178)))));
             this.ClientSize = new System.Drawing.Size(1179, 736);
+            this.Controls.Add(this.btnExportCsv);
             this.Controls.Add(this.listBoxProducts);
             this.Controls.Add(this.buttonFindProduct);
             this.Controls.Add(this.buttonAdd);
@@ -284,6 +296,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonFindProduct;
         private System.Windows.Forms.ListBox listBoxProducts;
+        private System.Windows.Forms.Button btnExportCsv;
     }
 }
 

@@ -57,18 +57,40 @@ namespace Raktar_Szinkron.Sevices
 
             return null;
         }
+        
 
-        public async Task<bool> UpdateInventoryAsync(string sku, int newQuantity)
+
+
+        public async Task<bool> UpdateInventoryAsync(string bvin, int newQuantity)
         {
-            string url = $"{_baseUrl}products/inventory/{sku}?key={_apiKey}";
+            //string url = $"{_baseUrl}products/{bvin}/inventory?key={_apiKey}";
+
+            //var payload = new
+            //{
+            //    QuantityOnHand = newQuantity
+            //};
+
+            //var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
+
+            //HttpResponseMessage response = await _client.PostAsync(url, content);
+            //return response.IsSuccessStatusCode;
+            string url = $"{_baseUrl}products/{bvin}/inventory?key={_apiKey}";
+
             var payload = new
             {
-                Quantity = newQuantity
+                QuantityOnHand = newQuantity
             };
 
-            var content = new StringContent(JsonConvert.SerializeObject(payload), System.Text.Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await _client.PutAsync(url, content);
+            HttpResponseMessage response = await _client.PostAsync(url, content);
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show($"API válasz:\n{responseBody}", "Frissítés hiba");
+            }
+
             return response.IsSuccessStatusCode;
         }
 
