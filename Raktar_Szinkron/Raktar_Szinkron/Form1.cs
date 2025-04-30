@@ -161,28 +161,41 @@ namespace Raktar_Szinkron
                 string sku = row.Cells["SKU"].Value?.ToString();
                 int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
 
-                var product = await _api.GetProductBySkuAsync(sku); // 1. Lekérés SKU alapján
+                bool success = _api.FrissitesKeszletre(sku, quantitySold);
 
-                if (product != null)
-                {
-                    string bvin = product.Bvin;
-                    int currentQty = product.QuantityOnHand ?? 0;
-                    int newQty = Math.Max(0, currentQty - quantitySold);
-
-                    bool success = await _api.UpdateInventoryAsync(bvin, newQty); // 2. Frissítés
-
-                    if (success)
-                    {
-                        row.Cells["Szinkronizálva"].Value = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Nem sikerült frissíteni: {sku}", "Hiba");
-                    }
-                }
+                if (success)
+                    row.Cells["Szinkronizalva"].Value = true;
             }
+            //    foreach (DataGridViewRow row in dgvSales.Rows)
+            //    {
+            //        if (row.IsNewRow) continue;
 
-            MessageBox.Show("Szinkronizálás befejezve.");
+            //        string sku = row.Cells["SKU"].Value?.ToString();
+            //        int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
+
+            //        var product = await _api.GetProductBySkuAsync(sku); // 1. Lekérés SKU alapján
+
+            //        if (product != null)
+            //        {
+            //            string bvin = product.Bvin;
+            //            int currentQty = product.QuantityOnHand ?? 0;
+            //            int newQty = Math.Max(0, currentQty - quantitySold);
+
+            //            bool success = await _api.UpdateInventoryAsync(bvin, newQty); // 2. Frissítés
+
+            //            if (success)
+            //            {
+            //                row.Cells["Szinkronizálva"].Value = true;
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show($"Nem sikerült frissíteni: {sku}", "Hiba");
+            //            }
+            //        }
+            //    }
+
+            //    MessageBox.Show("Szinkronizálás befejezve.");
+
         }
 
         private void btnExportCsv_Click(object sender, EventArgs e)
