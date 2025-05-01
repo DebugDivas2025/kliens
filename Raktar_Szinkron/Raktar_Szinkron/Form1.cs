@@ -280,16 +280,26 @@ namespace Raktar_Szinkron
                         string logFile = "sales_log.csv";
                         bool fileExists = File.Exists(logFile);
 
-                        using (StreamWriter sw = new StreamWriter(logFile, true, Encoding.UTF8))
+                        using (StreamWriter sw = new StreamWriter(logFile, true, Encoding.UTF8)) // append = true
                         {
                             if (!fileExists)
                                 sw.WriteLine("SKU;Quantity;SaleDate;Price");
 
                             foreach (var record in saleRecords)
                             {
-                                sw.WriteLine($"{record.SKU};{record.Quantity};{record.SaleDate:yyyy-MM-dd};{record.Price}");
+                                sw.WriteLine($"{record.SKU};{record.Quantity};{record.SaleDate:yyyy-MM-dd};{record.Price.ToString("0.00")}");
                             }
                         }
+                        //using (StreamWriter sw = new StreamWriter(logFile, true, Encoding.UTF8))
+                        //{
+                        //    if (!fileExists)
+                        //        sw.WriteLine("SKU;Quantity;SaleDate;Price");
+
+                        //    foreach (var record in saleRecords)
+                        //    {
+                        //        sw.WriteLine($"{record.SKU};{record.Quantity};{record.SaleDate:yyyy-MM-dd};{record.Price}");
+                        //    }
+                        //}
                         try
                         {
                             Process.Start(new ProcessStartInfo()

@@ -22,18 +22,16 @@ namespace Raktar_Szinkron
         private void btnFilter_Click(object sender, EventArgs e)
         {
             string logFile = "sales_log.csv";
+
             if (!File.Exists(logFile))
             {
-                MessageBox.Show("Nincs elérhető eladási napló.");
+                MessageBox.Show("Az eladási napló fájl nem található.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var fromDate = dtFrom.Value.Date;
-            var toDate = dtTo.Value.Date;
-
             var lines = File.ReadAllLines(logFile).Skip(1); // fejléc kihagyása
 
-            var query = lines
+            var allRecords = lines
                 .Select(line => line.Split(';'))
                 .Select(parts => new
                 {
@@ -41,7 +39,13 @@ namespace Raktar_Szinkron
                     Quantity = int.Parse(parts[1]),
                     SaleDate = DateTime.Parse(parts[2]),
                     Price = decimal.Parse(parts[3])
-                })
+                });
+
+            // dátumszűrés csak ha checkbox be van pipálva
+            DateTime fromDate = dtFrom.Checked ? dtFrom.Value.Date : DateTime.MinValue;
+            DateTime toDate = dtTo.Checked ? dtTo.Value.Date : DateTime.MaxValue;
+
+            var query = allRecords
                 .Where(x => x.SaleDate >= fromDate && x.SaleDate <= toDate)
                 .GroupBy(x => x.SKU)
                 .Select(g => new
@@ -54,6 +58,39 @@ namespace Raktar_Szinkron
                 .ToList();
 
             dgvSalesLog.DataSource = query;
+            //string logFile = "sales_log.csv";
+            //if (!File.Exists(logFile))
+            //{
+            //    MessageBox.Show("Nincs elérhető eladási napló.");
+            //    return;
+            //}
+            
+            //var fromDate = dtFrom.Value.Date;
+            //var toDate = dtTo.Value.Date;
+            
+            //var lines = File.ReadAllLines(logFile).Skip(1); // fejléc kihagyása
+
+            //var query = lines
+            //    .Select(line => line.Split(';'))
+            //    .Select(parts => new
+            //    {
+            //        SKU = parts[0],
+            //        Quantity = int.Parse(parts[1]),
+            //        SaleDate = DateTime.Parse(parts[2]),
+            //        Price = decimal.Parse(parts[3])
+            //    })
+            //    .Where(x => x.SaleDate >= fromDate && x.SaleDate <= toDate)
+            //    .GroupBy(x => x.SKU)
+            //    .Select(g => new
+            //    {
+            //        SKU = g.Key,
+            //        TotalQuantity = g.Sum(x => x.Quantity),
+            //        TotalRevenue = g.Sum(x => x.Quantity * x.Price)
+            //    })
+            //    .OrderByDescending(x => x.TotalRevenue)
+            //    .ToList();
+
+            //dgvSalesLog.DataSource = query;
         }
     }
 }
