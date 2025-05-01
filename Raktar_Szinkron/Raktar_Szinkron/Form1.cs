@@ -58,7 +58,7 @@ namespace Raktar_Szinkron
             //}
         }
 
-        private void buttonAdd_Click(object sender, EventArgs e)
+        private async void buttonAdd_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxSKU.Text) ||
         string.IsNullOrWhiteSpace(textBoxName.Text) ||
@@ -74,21 +74,63 @@ namespace Raktar_Szinkron
                 return;
             }
 
-            // Eladás létrehozása
+            string sku = textBoxSKU.Text.Trim();
+
+            // 🔽 Lekérjük az árat és eredeti készletet
+            decimal price = 0;
+            int originalQty = 0;
+
+            var product = await _api.GetProductBySkuAsync(sku);
+            if (product != null)
+            {
+                price = product.SitePrice;
+                originalQty = product.QuantityOnHand ?? 0;
+            }
+
+            // 🔽 Eladás létrehozása
             SaleRecord record = new SaleRecord
             {
-                SKU = textBoxSKU.Text.Trim(),
+                SKU = sku,
                 Quantity = quantity,
-                SaleDate = dateTimePicker1.Value
-                // Ha később képet is akarsz: azt is hozzáadjuk majd
+                SaleDate = dateTimePicker1.Value,
+                Price = price,
+                OriginalQuantity = originalQty,
+                UpdatedQuantity = originalQty
             };
 
             saleRecords.Add(record);
 
-            // Frissítsük a DataGridView-t
-            UpdateSalesGrid();
+            UpdateSalesGrid();  // frissítjük a gridet
+            ClearForm();        // kiürítjük a mezőket
+                                //    if (string.IsNullOrWhiteSpace(textBoxSKU.Text) ||
+                                //string.IsNullOrWhiteSpace(textBoxName.Text) ||
+                                //string.IsNullOrWhiteSpace(textBoxQuantity.Text))
+                                //    {
+                                //        MessageBox.Show("Kérlek töltsd ki a Termék nevét, SKU-t és Mennyiséget!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                //        return;
+                                //    }
 
-            ClearForm();
+            //    if (!int.TryParse(textBoxQuantity.Text, out int quantity) || quantity <= 0)
+            //    {
+            //        MessageBox.Show("Érvényes mennyiséget adj meg!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return;
+            //    }
+
+            //    // Eladás létrehozása
+            //    SaleRecord record = new SaleRecord
+            //    {
+            //        SKU = textBoxSKU.Text.Trim(),
+            //        Quantity = quantity,
+            //        SaleDate = dateTimePicker1.Value
+            //        // Ha később képet is akarsz: azt is hozzáadjuk majd
+            //    };
+
+            //    saleRecords.Add(record);
+
+            //    // Frissítsük a DataGridView-t
+            //    UpdateSalesGrid();
+
+            //    ClearForm();
         }
         private void UpdateSalesGrid()
         {
@@ -99,6 +141,9 @@ namespace Raktar_Szinkron
             dgvSales.Columns["SKU"].HeaderText = "SKU";
             dgvSales.Columns["Quantity"].HeaderText = "Mennyiség";
             dgvSales.Columns["SaleDate"].HeaderText = "Időpont";
+            dgvSales.Columns["Price"].HeaderText = "Ár (Ft)";
+            dgvSales.Columns["OriginalQuantity"].HeaderText = "Eredeti készlet";
+            dgvSales.Columns["UpdatedQuantity"].HeaderText="Új készlet";
             dgvSales.Columns["Szinkronizalva"].HeaderText = "Szinkronizálva";
             dgvSales.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
@@ -161,40 +206,28 @@ namespace Raktar_Szinkron
                 string sku = row.Cells["SKU"].Value?.ToString();
                 int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
 
-                bool success = _api.FrissitesKeszletre(sku, quantitySold);
+                // Új típus visszatérés (nem bool!)
+                var eredmeny = _api.FrissitesKeszletre(sku, quantitySold);
 
-                if (success)
+                if (eredmeny.Sikeres)
+                {
                     row.Cells["Szinkronizalva"].Value = true;
+
+                    // Grid frissítése az eredmény alapján
+                    row.Cells["Price"].Value = eredmeny.Ar.ToString("0.00");
+                    row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
+                    row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
+
+                    // Színezés: ha új készlet < 10 → piros
+                    if (eredmeny.UjKeszlet < 10)
+                        row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    else
+                        row.DefaultCellStyle.BackColor = Color.White;
+                }
             }
-            //    foreach (DataGridViewRow row in dgvSales.Rows)
-            //    {
-            //        if (row.IsNewRow) continue;
 
-            //        string sku = row.Cells["SKU"].Value?.ToString();
-            //        int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
+            MessageBox.Show("Szinkronizálás befejezve.");
 
-            //        var product = await _api.GetProductBySkuAsync(sku); // 1. Lekérés SKU alapján
-
-            //        if (product != null)
-            //        {
-            //            string bvin = product.Bvin;
-            //            int currentQty = product.QuantityOnHand ?? 0;
-            //            int newQty = Math.Max(0, currentQty - quantitySold);
-
-            //            bool success = await _api.UpdateInventoryAsync(bvin, newQty); // 2. Frissítés
-
-            //            if (success)
-            //            {
-            //                row.Cells["Szinkronizálva"].Value = true;
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show($"Nem sikerült frissíteni: {sku}", "Hiba");
-            //            }
-            //        }
-            //    }
-
-            //    MessageBox.Show("Szinkronizálás befejezve.");
 
         }
 

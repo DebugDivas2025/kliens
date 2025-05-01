@@ -14,7 +14,10 @@ namespace Raktar_Szinkron.Models
         public int Quantity { get; set; }
         public DateTime SaleDate { get; set; }
         public decimal Price { get; set; }
+        public int OriginalQuantity { get; set; }
+        public int UpdatedQuantity { get; set; }
         public bool Szinkronizalva { get; set; }
+
         //public Image ProductImage { get; set; }
         //public bool Synced { get; set; }
     }

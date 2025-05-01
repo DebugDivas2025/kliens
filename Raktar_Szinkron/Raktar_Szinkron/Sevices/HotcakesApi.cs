@@ -63,48 +63,87 @@ namespace Raktar_Szinkron.Sevices
 
             return null;
         }
-
-
-        public bool FrissitesKeszletre(string sku, int mennyiseg)
+        public KeszletFrissitesEredmeny FrissitesKeszletre(string sku, int mennyiseg)
         {
-            // 1. Termék keresése SKU alapján
-            var productResponse = _sdkApi.ProductsFindBySku(sku);
+            var eredmeny = new KeszletFrissitesEredmeny { Sikeres = false };
 
-            if (productResponse == null || productResponse.Content == null)
+            var productResponse = _sdkApi.ProductsFindBySku(sku);
+            if (productResponse?.Content == null)
             {
                 MessageBox.Show($"Nem található termék ezzel az SKU-val: {sku}");
-                return false;
+                return eredmeny;
             }
 
             var product = productResponse.Content;
+            eredmeny.Ar = product.SitePrice;
 
-            // 2. Inventory lekérése
             var inventoryResponse = _sdkApi.ProductInventoryFindForProduct(product.Bvin);
-
-            if (inventoryResponse == null || inventoryResponse.Content == null || inventoryResponse.Content.Count == 0)
+            if (inventoryResponse?.Content == null || inventoryResponse.Content.Count == 0)
             {
                 MessageBox.Show($"Nem található készletinformáció a termékhez: {sku}");
-                return false;
+                return eredmeny;
             }
 
             var inventory = inventoryResponse.Content.First();
 
-            // 3. Készlet csökkentése
-            int jelenlegiKeszlet = inventory.QuantityOnHand;
-            int ujKeszlet = Math.Max(0, jelenlegiKeszlet - mennyiseg);
-            inventory.QuantityOnHand = ujKeszlet;
+            eredmeny.EredetiKeszlet = inventory.QuantityOnHand;
+            int ujKeszlet = Math.Max(0, inventory.QuantityOnHand - mennyiseg);
+            eredmeny.UjKeszlet = ujKeszlet;
 
-            // 4. Frissítés küldése
+            inventory.QuantityOnHand = ujKeszlet;
             var updateResponse = _sdkApi.ProductInventoryUpdate(inventory);
 
             if (updateResponse.Errors != null && updateResponse.Errors.Count > 0)
             {
                 MessageBox.Show($"Hiba a frissítéskor: {string.Join(", ", updateResponse.Errors.Select(e => e.Description))}");
-                return false;
+                return eredmeny;
             }
 
-            return true;
+            eredmeny.Sikeres = true;
+            return eredmeny;
         }
+
+
+        //public bool FrissitesKeszletre(string sku, int mennyiseg)
+        //{
+        //    // 1. Termék keresése SKU alapján
+        //    var productResponse = _sdkApi.ProductsFindBySku(sku);
+
+        //    if (productResponse == null || productResponse.Content == null)
+        //    {
+        //        MessageBox.Show($"Nem található termék ezzel az SKU-val: {sku}");
+        //        return false;
+        //    }
+
+        //    var product = productResponse.Content;
+
+        //    // 2. Inventory lekérése
+        //    var inventoryResponse = _sdkApi.ProductInventoryFindForProduct(product.Bvin);
+
+        //    if (inventoryResponse == null || inventoryResponse.Content == null || inventoryResponse.Content.Count == 0)
+        //    {
+        //        MessageBox.Show($"Nem található készletinformáció a termékhez: {sku}");
+        //        return false;
+        //    }
+
+        //    var inventory = inventoryResponse.Content.First();
+
+        //    // 3. Készlet csökkentése
+        //    int jelenlegiKeszlet = inventory.QuantityOnHand;
+        //    int ujKeszlet = Math.Max(0, jelenlegiKeszlet - mennyiseg);
+        //    inventory.QuantityOnHand = ujKeszlet;
+
+        //    // 4. Frissítés küldése
+        //    var updateResponse = _sdkApi.ProductInventoryUpdate(inventory);
+
+        //    if (updateResponse.Errors != null && updateResponse.Errors.Count > 0)
+        //    {
+        //        MessageBox.Show($"Hiba a frissítéskor: {string.Join(", ", updateResponse.Errors.Select(e => e.Description))}");
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
 
         public async Task<bool> UpdateInventoryAsync(string bvin, int newQuantity)
         {

@@ -43,7 +43,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dgvSales = new System.Windows.Forms.DataGridView();
             this.btnSync = new System.Windows.Forms.Button();
-            this.buttonTestApi = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonFindProduct = new System.Windows.Forms.Button();
             this.listBoxProducts = new System.Windows.Forms.ListBox();
@@ -55,11 +54,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(34, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(218, 25);
+            this.label1.Size = new System.Drawing.Size(266, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bolti eladás rögzítése";
             // 
@@ -113,7 +112,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(67, 221);
+            this.label6.Location = new System.Drawing.Point(67, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(86, 22);
             this.label6.TabIndex = 5;
@@ -142,7 +141,7 @@
             // 
             // textBoxQuantity
             // 
-            this.textBoxQuantity.Location = new System.Drawing.Point(282, 222);
+            this.textBoxQuantity.Location = new System.Drawing.Point(282, 228);
             this.textBoxQuantity.Name = "textBoxQuantity";
             this.textBoxQuantity.Size = new System.Drawing.Size(83, 22);
             this.textBoxQuantity.TabIndex = 9;
@@ -157,11 +156,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(34, 319);
+            this.label7.Location = new System.Drawing.Point(34, 354);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(198, 25);
+            this.label7.Size = new System.Drawing.Size(240, 29);
             this.label7.TabIndex = 11;
             this.label7.Text = "Bővülő eladási lista";
             // 
@@ -169,18 +168,19 @@
             // 
             this.dgvSales.BackgroundColor = System.Drawing.Color.White;
             this.dgvSales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSales.Location = new System.Drawing.Point(39, 365);
+            this.dgvSales.Location = new System.Drawing.Point(39, 398);
             this.dgvSales.Name = "dgvSales";
             this.dgvSales.RowHeadersWidth = 51;
             this.dgvSales.RowTemplate.Height = 24;
-            this.dgvSales.Size = new System.Drawing.Size(680, 300);
+            this.dgvSales.Size = new System.Drawing.Size(913, 267);
             this.dgvSales.TabIndex = 13;
             // 
             // btnSync
             // 
             this.btnSync.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.btnSync.ForeColor = System.Drawing.Color.White;
-            this.btnSync.Location = new System.Drawing.Point(282, 671);
+            this.btnSync.Location = new System.Drawing.Point(39, 671);
             this.btnSync.Name = "btnSync";
             this.btnSync.Size = new System.Drawing.Size(161, 53);
             this.btnSync.TabIndex = 14;
@@ -188,23 +188,14 @@
             this.btnSync.UseVisualStyleBackColor = false;
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
-            // buttonTestApi
-            // 
-            this.buttonTestApi.Location = new System.Drawing.Point(858, 69);
-            this.buttonTestApi.Name = "buttonTestApi";
-            this.buttonTestApi.Size = new System.Drawing.Size(84, 38);
-            this.buttonTestApi.TabIndex = 15;
-            this.buttonTestApi.Text = "api";
-            this.buttonTestApi.UseVisualStyleBackColor = true;
-            this.buttonTestApi.Click += new System.EventHandler(this.buttonTestApi_Click);
-            // 
             // buttonAdd
             // 
             this.buttonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(342, 262);
+            this.buttonAdd.Location = new System.Drawing.Point(342, 265);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(101, 49);
+            this.buttonAdd.Size = new System.Drawing.Size(101, 59);
             this.buttonAdd.TabIndex = 16;
             this.buttonAdd.Text = "Hozzáadás";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -213,10 +204,11 @@
             // buttonFindProduct
             // 
             this.buttonFindProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.buttonFindProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonFindProduct.ForeColor = System.Drawing.Color.White;
-            this.buttonFindProduct.Location = new System.Drawing.Point(215, 262);
+            this.buttonFindProduct.Location = new System.Drawing.Point(215, 265);
             this.buttonFindProduct.Name = "buttonFindProduct";
-            this.buttonFindProduct.Size = new System.Drawing.Size(100, 49);
+            this.buttonFindProduct.Size = new System.Drawing.Size(100, 59);
             this.buttonFindProduct.TabIndex = 17;
             this.buttonFindProduct.Text = "Keresés";
             this.buttonFindProduct.UseVisualStyleBackColor = false;
@@ -228,28 +220,34 @@
             this.listBoxProducts.ItemHeight = 16;
             this.listBoxProducts.Location = new System.Drawing.Point(483, 85);
             this.listBoxProducts.Name = "listBoxProducts";
-            this.listBoxProducts.Size = new System.Drawing.Size(236, 212);
+            this.listBoxProducts.Size = new System.Drawing.Size(469, 244);
             this.listBoxProducts.TabIndex = 18;
             this.listBoxProducts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // btnExportCsv
             // 
-            this.btnExportCsv.Location = new System.Drawing.Point(755, 386);
+            this.btnExportCsv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnExportCsv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnExportCsv.ForeColor = System.Drawing.Color.White;
+            this.btnExportCsv.Location = new System.Drawing.Point(981, 398);
             this.btnExportCsv.Name = "btnExportCsv";
             this.btnExportCsv.Size = new System.Drawing.Size(122, 113);
             this.btnExportCsv.TabIndex = 19;
             this.btnExportCsv.Text = "Exportálás CSV-be";
-            this.btnExportCsv.UseVisualStyleBackColor = true;
+            this.btnExportCsv.UseVisualStyleBackColor = false;
             this.btnExportCsv.Click += new System.EventHandler(this.btnExportCsv_Click);
             // 
             // btnOpenSalesLog
             // 
-            this.btnOpenSalesLog.Location = new System.Drawing.Point(755, 551);
+            this.btnOpenSalesLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnOpenSalesLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnOpenSalesLog.ForeColor = System.Drawing.Color.White;
+            this.btnOpenSalesLog.Location = new System.Drawing.Point(981, 552);
             this.btnOpenSalesLog.Name = "btnOpenSalesLog";
-            this.btnOpenSalesLog.Size = new System.Drawing.Size(122, 95);
+            this.btnOpenSalesLog.Size = new System.Drawing.Size(122, 113);
             this.btnOpenSalesLog.TabIndex = 20;
             this.btnOpenSalesLog.Text = "Eladási napló megnyitása";
-            this.btnOpenSalesLog.UseVisualStyleBackColor = true;
+            this.btnOpenSalesLog.UseVisualStyleBackColor = false;
             this.btnOpenSalesLog.Click += new System.EventHandler(this.btnOpenSalesLog_Click);
             // 
             // Form1
@@ -263,7 +261,6 @@
             this.Controls.Add(this.listBoxProducts);
             this.Controls.Add(this.buttonFindProduct);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.buttonTestApi);
             this.Controls.Add(this.btnSync);
             this.Controls.Add(this.dgvSales);
             this.Controls.Add(this.label7);
@@ -304,7 +301,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.Button btnSync;
-        private System.Windows.Forms.Button buttonTestApi;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonFindProduct;
         private System.Windows.Forms.ListBox listBoxProducts;
