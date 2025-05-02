@@ -33,23 +33,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Hotcakes.Commerce">
-      <HintPath>..\..\..\..\..\..\..\rf\dll\Hotcakes.Commerce.dll</HintPath>
+    <Reference Include="DotNetNuke">
+      <HintPath>libs\DotNetNuke.dll</HintPath>
     </Reference>
-    <Reference Include="Hotcakes.Commerce.Dnn">
-      <HintPath>..\..\..\..\..\..\..\rf\dll\Hotcakes.Commerce.Dnn.dll</HintPath>
+    <Reference Include="Hotcakes.Commerce, Version=3.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Hotcakes.Commerce.dll</HintPath>
     </Reference>
-    <Reference Include="Hotcakes.CommerceDTO">
-      <HintPath>..\..\..\..\..\..\..\rf\dll\Hotcakes.CommerceDTO.dll</HintPath>
+    <Reference Include="Hotcakes.CommerceDTO, Version=3.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Hotcakes.CommerceDTO.dll</HintPath>
     </Reference>
-    <Reference Include="Hotcakes.Web">
-      <HintPath>..\..\..\..\..\..\..\rf\dll\Hotcakes.Web.dll</HintPath>
+    <Reference Include="Hotcakes.Web, Version=3.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>libs\Hotcakes.Web.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>libs\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
+    <Folder Include="libs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
