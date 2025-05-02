@@ -332,5 +332,27 @@ namespace Raktar_Szinkron
             var logForm = new SalesLogForm();
             logForm.Show();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show(
+        "Biztosan törölni szeretnéd az összes eladási sort?",
+        "Megerősítés",
+        MessageBoxButtons.YesNo,
+        MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                saleRecords.Clear();        // ha van ilyen lista
+                UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+            }
+        }
+        private void dgvSales_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                btnDelete_Click(sender, e); // ugyanazt hívjuk meg
+            }
+        }
     }
 }
