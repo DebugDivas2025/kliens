@@ -17,7 +17,7 @@ namespace Raktar_Szinkron
     public partial class Form1 : Form
     {
         //private HotcakesApi api;
-        private HotcakesApi _api = new HotcakesApi();
+        internal HotcakesApi _api = new HotcakesApi();
         private List<SaleRecord> saleRecords = new List<SaleRecord>();
 
         public Form1()
@@ -231,7 +231,7 @@ namespace Raktar_Szinkron
 
         }
 
-        private void btnExportCsv_Click(object sender, EventArgs e)
+        internal void btnExportCsv_Click(object sender, EventArgs e)
         {
             if (dgvSales.Rows.Count == 0)
             {

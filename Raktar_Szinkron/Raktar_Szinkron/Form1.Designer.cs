@@ -308,18 +308,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.TextBox textBoxSKU;
-        private System.Windows.Forms.TextBox textBoxPrice;
-        private System.Windows.Forms.TextBox textBoxQuantity;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        internal System.Windows.Forms.TextBox textBoxName;
+        internal System.Windows.Forms.TextBox textBoxSKU;
+        internal System.Windows.Forms.TextBox textBoxPrice;
+        internal System.Windows.Forms.TextBox textBoxQuantity;
+        internal System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DataGridView dgvSales;
+        internal System.Windows.Forms.DataGridView dgvSales;
         private System.Windows.Forms.Button btnSync;
-        private System.Windows.Forms.Button buttonAdd;
-        private System.Windows.Forms.Button buttonFindProduct;
+        internal System.Windows.Forms.Button buttonAdd;
+        internal System.Windows.Forms.Button buttonFindProduct;
         private System.Windows.Forms.ListBox listBoxProducts;
-        private System.Windows.Forms.Button btnExportCsv;
+        internal System.Windows.Forms.Button btnExportCsv;
         private System.Windows.Forms.Button btnOpenSalesLog;
         private System.Windows.Forms.Button btnDelete;
     }

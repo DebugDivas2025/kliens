@@ -14,7 +14,8 @@ using Hotcakes.CommerceDTO.v1.Catalog;
 
 namespace Raktar_Szinkron.Sevices
 {
-    public class HotcakesApi
+   
+    public class HotcakesApi 
     {
         private readonly Api _sdkApi;
         private readonly HttpClient _client;

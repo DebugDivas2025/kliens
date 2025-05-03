@@ -11,13 +11,13 @@ namespace Raktar_Szinkron.Tests.Models
             // Arrange & Act
             var product = new Product
             {
-                ProductName = "Kávéfõzõ",
-                Sku = "KF123"
+                ProductName = "Alma",
+                Sku = "alm123"
             };
 
             // Assert
-            Assert.Equal("Kávéfõzõ", product.ProductName);
-            Assert.Equal("KF123", product.Sku);
+            Assert.Equal("Alma", product.ProductName);
+            Assert.Equal("alm123", product.Sku);
         }
 
         [Fact]
