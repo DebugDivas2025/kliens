@@ -87,6 +87,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SalesLogForm";
             this.Text = "Eladási napló";
+            this.Load += new System.EventHandler(this.SalesLogForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesLog)).EndInit();
             this.ResumeLayout(false);
 

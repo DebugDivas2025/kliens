@@ -92,5 +92,47 @@ namespace Raktar_Szinkron
 
             //dgvSalesLog.DataSource = query;
         }
+
+        private void SalesLogForm_Load(object sender, EventArgs e)
+        {
+            string logFile = Path.Combine(Application.StartupPath, "sales_log.csv");
+
+            if (!File.Exists(logFile))
+            {
+                MessageBox.Show("A naplófájl nem található.", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                var lines = File.ReadAllLines(logFile).Skip(1); // fejléc kihagyása
+
+                var allRecords = lines
+                    .Select(line => line.Split(';'))
+                    .Where(parts => parts.Length >= 4)
+                    .Select(parts => new
+                    {
+                        SKU = parts[0],
+                        Quantity = int.Parse(parts[1]),
+                        SaleDate = DateTime.Parse(parts[2]),
+                        Price = decimal.Parse(parts[3])
+                    })
+                    .GroupBy(x => x.SKU)
+                    .Select(g => new
+                    {
+                        SKU = g.Key,
+                        TotalQuantity = g.Sum(x => x.Quantity),
+                        TotalRevenue = g.Sum(x => x.Quantity * x.Price)
+                    })
+                    .OrderByDescending(x => x.TotalRevenue)
+                    .ToList();
+
+                dgvSalesLog.DataSource = allRecords;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba az eladási napló betöltésekor:\n" + ex.Message, "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
