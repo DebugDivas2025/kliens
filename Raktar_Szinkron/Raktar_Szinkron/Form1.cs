@@ -16,7 +16,7 @@ namespace Raktar_Szinkron
 {
     public partial class Form1 : Form
     {
-        //private HotcakesApi api;
+        
         private HotcakesApi _api = new HotcakesApi();
         private List<SaleRecord> saleRecords = new List<SaleRecord>();
 
@@ -44,6 +44,13 @@ namespace Raktar_Szinkron
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            string sampleLogPath = Path.Combine(Application.StartupPath, "Resources", "sales_log_sample.csv");
+            string targetLogPath = Path.Combine(Application.StartupPath, "sales_log.csv");
+
+            if (!File.Exists(targetLogPath))
+            {
+                File.Copy(sampleLogPath, targetLogPath);
+            }
             //HotcakesApi api = new HotcakesApi();
 
             //var product = await api.GetProductBySkuAsync("kaspo002");
@@ -76,7 +83,7 @@ namespace Raktar_Szinkron
 
             string sku = textBoxSKU.Text.Trim();
 
-            // 🔽 Lekérjük az árat és eredeti készletet
+            // Lekérjük az árat és eredeti készletet
             decimal price = 0;
             int originalQty = 0;
 
@@ -87,7 +94,7 @@ namespace Raktar_Szinkron
                 originalQty = product.QuantityOnHand ?? 0;
             }
 
-            // 🔽 Eladás létrehozása
+            // Eladás létrehozása
             SaleRecord record = new SaleRecord
             {
                 SKU = sku,
@@ -100,44 +107,16 @@ namespace Raktar_Szinkron
 
             saleRecords.Add(record);
 
-            UpdateSalesGrid();  // frissítjük a gridet
-            ClearForm();        // kiürítjük a mezőket
-                                //    if (string.IsNullOrWhiteSpace(textBoxSKU.Text) ||
-                                //string.IsNullOrWhiteSpace(textBoxName.Text) ||
-                                //string.IsNullOrWhiteSpace(textBoxQuantity.Text))
-                                //    {
-                                //        MessageBox.Show("Kérlek töltsd ki a Termék nevét, SKU-t és Mennyiséget!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                //        return;
-                                //    }
+            UpdateSalesGrid();
+            ClearForm();
 
-            //    if (!int.TryParse(textBoxQuantity.Text, out int quantity) || quantity <= 0)
-            //    {
-            //        MessageBox.Show("Érvényes mennyiséget adj meg!", "Hiba", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-
-            //    // Eladás létrehozása
-            //    SaleRecord record = new SaleRecord
-            //    {
-            //        SKU = textBoxSKU.Text.Trim(),
-            //        Quantity = quantity,
-            //        SaleDate = dateTimePicker1.Value
-            //        // Ha később képet is akarsz: azt is hozzáadjuk majd
-            //    };
-
-            //    saleRecords.Add(record);
-
-            //    // Frissítsük a DataGridView-t
-            //    UpdateSalesGrid();
-
-            //    ClearForm();
         }
         private void UpdateSalesGrid()
         {
             dgvSales.DataSource = null;              // Először nullázzuk, hogy frissüljön
             dgvSales.DataSource = saleRecords;        // Újra betöltjük a lista tartalmát
 
-            //// Oszlopok újracímkézése csak egyszer kéne (de most gyorsan itt is)
+            //// Oszlopok újracímkézése 
             dgvSales.Columns["SKU"].HeaderText = "SKU";
             dgvSales.Columns["Quantity"].HeaderText = "Mennyiség";
             dgvSales.Columns["SaleDate"].HeaderText = "Időpont";
@@ -218,9 +197,13 @@ namespace Raktar_Szinkron
                     row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
                     row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
 
-                    // Színezés: ha új készlet < 10 → piros
+                    // Színezés
                     if (eredmeny.UjKeszlet < 10)
                         row.DefaultCellStyle.BackColor = Color.LightCoral;
+                    else if (eredmeny.UjKeszlet < 20)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.Khaki; // sárga
+                    }
                     else
                         row.DefaultCellStyle.BackColor = Color.White;
                 }
@@ -343,15 +326,15 @@ namespace Raktar_Szinkron
 
             if (confirm == DialogResult.Yes)
             {
-                saleRecords.Clear();        // ha van ilyen lista
-                UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+                saleRecords.Clear();        
+                UpdateSalesGrid();          
             }
         }
         private void dgvSales_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                btnDelete_Click(sender, e); // ugyanazt hívjuk meg
+                btnDelete_Click(sender, e);
             }
         }
     }
