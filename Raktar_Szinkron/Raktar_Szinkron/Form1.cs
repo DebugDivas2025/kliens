@@ -200,34 +200,42 @@ namespace Raktar_Szinkron
 
         private async void btnSync_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgvSales.Rows)
+            if (dgvSales.Rows.Count == 0)
             {
-                if (row.IsNewRow) continue;
-
-                string sku = row.Cells["SKU"].Value?.ToString();
-                int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
-
-                // Új típus visszatérés (nem bool!)
-                var eredmeny = _api.FrissitesKeszletre(sku, quantitySold);
-
-                if (eredmeny.Sikeres)
-                {
-                    row.Cells["Szinkronizalva"].Value = true;
-
-                    // Grid frissítése az eredmény alapján
-                    row.Cells["Price"].Value = eredmeny.Ar.ToString("0.00");
-                    row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
-                    row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
-
-                    // Színezés: ha új készlet < 10 → piros
-                    if (eredmeny.UjKeszlet < 10)
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                    else
-                        row.DefaultCellStyle.BackColor = Color.White;
-                }
+                MessageBox.Show("Nincs szinkronizáladnó adat!", "Figyelmeztetés", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+            else
+            {
+                foreach (DataGridViewRow row in dgvSales.Rows)
+                {
+                    if (row.IsNewRow) continue;
 
-            MessageBox.Show("Szinkronizálás befejezve.");
+                    string sku = row.Cells["SKU"].Value?.ToString();
+                    int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
+
+                    // Új típus visszatérés (nem bool!)
+                    var eredmeny = _api.FrissitesKeszletre(sku, quantitySold);
+
+                    if (eredmeny.Sikeres)
+                    {
+                        row.Cells["Szinkronizalva"].Value = true;
+
+                        // Grid frissítése az eredmény alapján
+                        row.Cells["Price"].Value = eredmeny.Ar.ToString("0.00");
+                        row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
+                        row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
+
+                        // Színezés: ha új készlet < 10 → piros
+                        if (eredmeny.UjKeszlet < 10)
+                            row.DefaultCellStyle.BackColor = Color.LightCoral;
+                        else
+                            row.DefaultCellStyle.BackColor = Color.White;
+                    }
+                }
+
+                MessageBox.Show("Szinkronizálás befejezve.");
+            }
 
 
         }
@@ -336,16 +344,24 @@ namespace Raktar_Szinkron
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show(
-        "Biztosan törölni szeretnéd az összes eladási sort?",
-        "Megerősítés",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
+            if (dgvSales.Rows.Count == 0)
             {
-                saleRecords.Clear();        // ha van ilyen lista
-                UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+                MessageBox.Show("Nincs törlendő adat!", "Figyelmeztetés", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                var confirm = MessageBox.Show(
+            "Biztosan törölni szeretnéd az összes eladási sort?",
+            "Megerősítés",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    saleRecords.Clear();        // ha van ilyen lista
+                    UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+                }
             }
         }
         private void dgvSales_KeyDown(object sender, KeyEventArgs e)
