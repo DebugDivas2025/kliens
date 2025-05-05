@@ -77,7 +77,7 @@ namespace Raktar_Szinkron.Tests
             _form?.Dispose();
         }
 
-       
+
 
         [Fact]
         public void TestDeleteButton_ClearsSalesRecords()
@@ -147,7 +147,7 @@ namespace Raktar_Szinkron.Tests
                 BindingFlags.Instance | BindingFlags.NonPublic);
             method?.Invoke(_form, parameters);
 
-            
+
         }
         [Fact]
         public void TestClearForm_ShouldResetAllFields()
@@ -170,7 +170,6 @@ namespace Raktar_Szinkron.Tests
             Assert.Equal(string.Empty, _form.textBoxPrice.Text);
             Assert.True((DateTime.Now - _form.dateTimePicker1.Value).TotalSeconds < 5); // Ellenőrizzük, hogy az időpont frissült-e
         }
-
 
     }
 }

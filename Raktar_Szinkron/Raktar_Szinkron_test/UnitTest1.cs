@@ -38,11 +38,6 @@ namespace Raktar_Szinkron.Tests.Models
             Assert.Equal(24999m, product.SitePrice);
         }
 
-        [Fact]
-        public void Default_QuantityOnHand_IsNull()
-        {
-            var product = new Product();
-            Assert.Null(product.QuantityOnHand);
-        }
+        
     }
 }

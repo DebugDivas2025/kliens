@@ -157,7 +157,7 @@ namespace Raktar_Szinkron
             dateTimePicker1.Value = DateTime.Now;
         }
 
-        private async void buttonFindProduct_Click(object sender, EventArgs e)
+        public async void buttonFindProduct_Click(object sender, EventArgs e)
         {
             string searchText = textBoxName.Text.Trim();
             if (string.IsNullOrEmpty(searchText))
@@ -166,6 +166,7 @@ namespace Raktar_Szinkron
                 return;
             }
 
+            // Aszinkron hívás, amit várunk
             var allProducts = await _api.GetAllProductsAsync();
             if (allProducts == null)
             {
