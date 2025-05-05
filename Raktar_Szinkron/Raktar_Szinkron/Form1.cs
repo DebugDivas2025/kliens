@@ -17,7 +17,7 @@ namespace Raktar_Szinkron
     public partial class Form1 : Form
     {
         //private HotcakesApi api;
-        private HotcakesApi _api = new HotcakesApi();
+        internal HotcakesApi _api = new HotcakesApi();
         private List<SaleRecord> saleRecords = new List<SaleRecord>();
 
         public Form1()
@@ -157,7 +157,7 @@ namespace Raktar_Szinkron
             dateTimePicker1.Value = DateTime.Now;
         }
 
-        private async void buttonFindProduct_Click(object sender, EventArgs e)
+        public async void buttonFindProduct_Click(object sender, EventArgs e)
         {
             string searchText = textBoxName.Text.Trim();
             if (string.IsNullOrEmpty(searchText))
@@ -166,6 +166,7 @@ namespace Raktar_Szinkron
                 return;
             }
 
+            // Aszinkron hívás, amit várunk
             var allProducts = await _api.GetAllProductsAsync();
             if (allProducts == null)
             {
@@ -199,39 +200,47 @@ namespace Raktar_Szinkron
 
         private async void btnSync_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgvSales.Rows)
+            if (dgvSales.Rows.Count == 0)
             {
-                if (row.IsNewRow) continue;
-
-                string sku = row.Cells["SKU"].Value?.ToString();
-                int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
-
-                // Új típus visszatérés (nem bool!)
-                var eredmeny = _api.FrissitesKeszletre(sku, quantitySold);
-
-                if (eredmeny.Sikeres)
-                {
-                    row.Cells["Szinkronizalva"].Value = true;
-
-                    // Grid frissítése az eredmény alapján
-                    row.Cells["Price"].Value = eredmeny.Ar.ToString("0.00");
-                    row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
-                    row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
-
-                    // Színezés: ha új készlet < 10 → piros
-                    if (eredmeny.UjKeszlet < 10)
-                        row.DefaultCellStyle.BackColor = Color.LightCoral;
-                    else
-                        row.DefaultCellStyle.BackColor = Color.White;
-                }
+                MessageBox.Show("Nincs szinkronizáladnó adat!", "Figyelmeztetés", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+            else
+            {
+                foreach (DataGridViewRow row in dgvSales.Rows)
+                {
+                    if (row.IsNewRow) continue;
 
-            MessageBox.Show("Szinkronizálás befejezve.");
+                    string sku = row.Cells["SKU"].Value?.ToString();
+                    int quantitySold = Convert.ToInt32(row.Cells["Quantity"].Value);
+
+                    // Új típus visszatérés (nem bool!)
+                    var eredmeny = _api.FrissitesKeszletre(sku, quantitySold);
+
+                    if (eredmeny.Sikeres)
+                    {
+                        row.Cells["Szinkronizalva"].Value = true;
+
+                        // Grid frissítése az eredmény alapján
+                        row.Cells["Price"].Value = eredmeny.Ar.ToString("0.00");
+                        row.Cells["OriginalQuantity"].Value = eredmeny.EredetiKeszlet;
+                        row.Cells["UpdatedQuantity"].Value = eredmeny.UjKeszlet;
+
+                        // Színezés: ha új készlet < 10 → piros
+                        if (eredmeny.UjKeszlet < 10)
+                            row.DefaultCellStyle.BackColor = Color.LightCoral;
+                        else
+                            row.DefaultCellStyle.BackColor = Color.White;
+                    }
+                }
+
+                MessageBox.Show("Szinkronizálás befejezve.");
+            }
 
 
         }
 
-        private void btnExportCsv_Click(object sender, EventArgs e)
+        internal void btnExportCsv_Click(object sender, EventArgs e)
         {
             if (dgvSales.Rows.Count == 0)
             {
@@ -335,16 +344,24 @@ namespace Raktar_Szinkron
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var confirm = MessageBox.Show(
-        "Biztosan törölni szeretnéd az összes eladási sort?",
-        "Megerősítés",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question);
-
-            if (confirm == DialogResult.Yes)
+            if (dgvSales.Rows.Count == 0)
             {
-                saleRecords.Clear();        // ha van ilyen lista
-                UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+                MessageBox.Show("Nincs törlendő adat!", "Figyelmeztetés", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                var confirm = MessageBox.Show(
+            "Biztosan törölni szeretnéd az összes eladási sort?",
+            "Megerősítés",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    saleRecords.Clear();        // ha van ilyen lista
+                    UpdateSalesGrid();          // frissíti a gridet (DataSource = null, majd újra)
+                }
             }
         }
         private void dgvSales_KeyDown(object sender, KeyEventArgs e)

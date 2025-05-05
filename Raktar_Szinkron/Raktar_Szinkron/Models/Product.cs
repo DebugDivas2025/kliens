@@ -9,11 +9,13 @@ namespace Raktar_Szinkron.Models
     public class Product
     {
         public string Sku { get; set; }
-        public int? QuantityOnHand { get; set; }
+        public int? QuantityOnHand { get; set; } = 0;
         public string ProductName { get; set; }
         public decimal SitePrice { get; set; }
         public string Bvin { get; set; }
         //public string ImageFileSmall { get; set; }
+
+       
 
     }
 }

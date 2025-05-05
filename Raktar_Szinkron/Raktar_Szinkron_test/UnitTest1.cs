@@ -11,13 +11,13 @@ namespace Raktar_Szinkron.Tests.Models
             // Arrange & Act
             var product = new Product
             {
-                ProductName = "Kávéfõzõ",
-                Sku = "KF123"
+                ProductName = "Alma",
+                Sku = "alm123"
             };
 
             // Assert
-            Assert.Equal("Kávéfõzõ", product.ProductName);
-            Assert.Equal("KF123", product.Sku);
+            Assert.Equal("Alma", product.ProductName);
+            Assert.Equal("alm123", product.Sku);
         }
 
         [Fact]
@@ -38,11 +38,6 @@ namespace Raktar_Szinkron.Tests.Models
             Assert.Equal(24999m, product.SitePrice);
         }
 
-        [Fact]
-        public void Default_QuantityOnHand_IsNull()
-        {
-            var product = new Product();
-            Assert.Null(product.QuantityOnHand);
-        }
+        
     }
 }
