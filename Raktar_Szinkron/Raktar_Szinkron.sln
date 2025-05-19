@@ -5,7 +5,9 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raktar_Szinkron", "Raktar_Szinkron\Raktar_Szinkron.csproj", "{7E16A278-0E27-4ADD-B600-1EEAE9C6B73C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raktar_Szinkron_test", "Raktar_Szinkron_test\Raktar_Szinkron_test.csproj", "{3139903B-9A1D-47D2-88D0-E43956BACF20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raktar_Szinkron_test", "Raktar_Szinkron_test\Raktar_Szinkron_test.csproj", "{3139903B-9A1D-47D2-88D0-E43956BACF20}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TestSetup", "TestSetup\TestSetup.vdproj", "{F58EE9CD-81FF-415F-8753-189DF5F8D169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,8 @@ Global
 		{3139903B-9A1D-47D2-88D0-E43956BACF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3139903B-9A1D-47D2-88D0-E43956BACF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3139903B-9A1D-47D2-88D0-E43956BACF20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F58EE9CD-81FF-415F-8753-189DF5F8D169}.Debug|Any CPU.ActiveCfg = Debug
+		{F58EE9CD-81FF-415F-8753-189DF5F8D169}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
